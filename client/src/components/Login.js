@@ -2,18 +2,18 @@ import React, {useState} from "react";
 import Auth from "./axiosAuth"
 
 const Login = (props) => {
-  const [user, setUser] = useState({ username: "", password: ""});
+  const [user, setUser] = useState({ username: "", password: "" });
 
-  const handlechange = event => {
-    setUser({...user, [event.target.name]: event.target.value });
+  const handleChange = event => {
+    setUser({ ...user, [event.target.name]: event.target.value });
   };
 
-  const handlesubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
     Auth()
-      .post (`http://localhost:5000/api/login`, user)
-      .then( res => {
-        console.log (res.data);
+      .post(`http://localhost:5000/api/login`, user)
+      .then(res => {
+        console.log(res.data);
         localStorage.setItem("token", res.data.payload);
         props.history.push("/bubble-page");
       })
@@ -25,23 +25,23 @@ const Login = (props) => {
   return (
     <>
       <h1>Welcome to the Bubble App!</h1>
-      <p>Build a login page here</p>
-      <form onSubmit={handleSubmit}>
-        <input
-        type="username"
-        name="username"
-        placeholder="user name"
-        value={user.username}
-        onChange={handleChange} >
-        </input>
-        <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={user.password}
-        onChange={handleChange} ></input>
-<button type="submit">LOG IN</button>
-      </form>
+        <p>Login Here</p>
+          <form onSubmit={handleSubmit}>
+            <input
+            type="username"
+            name="username"
+            placeholder="user name"
+            value={user.username}
+            onChange={handleChange} >
+            </input>
+            <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={user.password}
+            onChange={handleChange} ></input>
+    <button type="submit">LOG IN</button>
+          </form>
     </>
   );
 };
